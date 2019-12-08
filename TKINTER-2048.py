@@ -231,6 +231,9 @@ BkgdBox16 = canvas.create_rectangle(505, 560, 605, 660, fill="#C2C0B8", outline=
     
 #****************************Lets Play!!!************************
 
+#Spawn two random Tiles
+SpawnRandomTile()
+SpawnRandomTile()
 #Bind Keys
 master.bind_all('<Left>', LeftKey)
 master.bind_all('<Right>', RightKey)
