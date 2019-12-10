@@ -11,6 +11,7 @@ BoardYMatrix = math.array([(200, 200, 200, 200), (320, 320, 320, 320), (440, 440
 SpacesToMove = 0
 ScoreNum = 0
 HighScoreNum = 0
+AutoRun1 = False
 
 #SpawnRandomTile() Variables
 OpenSpaces = []
@@ -236,6 +237,10 @@ def RunGameFrame(direction):
 
 def LoseGame():
     global LoseS
+    global AutoRun1
+
+    #turn off auto run
+    AutoRun1 = False
     
     #unbind all keys
     UnbindKeys()
@@ -258,6 +263,10 @@ def LoseGame():
 def LostGame(): CreateNewGame(LoseS)
 
 def NewGame(): CreateNewGame(1)
+
+def AutoRunOn():
+    global AutoRun1
+    AutoRun1 = True
 
 def PossibleMove():
     global BoardMatrix
@@ -361,9 +370,14 @@ def CreateNewGame(W):
 #****************************Lets Play!!!************************
 
 #create new game button
-NewGameButton = tk. Button(master, text = "Start New Game", font=('Helvetica', '15', 'bold'), command = NewGame)
+NewGameButton = tk. Button(master, text = "Start New Game", font=('Helvetica', '13', 'bold'), command = NewGame)
 NewGameButton.configure(width = 13, activebackground = "#33B5E5")
-button1_window = canvas.create_window(535, 150, window=NewGameButton)
+button1_window = canvas.create_window(535, 160, window=NewGameButton)
+
+#create Aut0Run button
+AutoRunButton = tk. Button(master, text = "Activate AutoRun", font=('Helvetica', '13', 'bold'), command = AutoRunOn)
+AutoRunButton.configure(width = 13, activebackground = "#33B5E5")
+button2_window = canvas.create_window(535, 110, window=AutoRunButton)
 
 #Create New Game
 CreateNewGame(1)
@@ -372,6 +386,7 @@ CreateNewGame(1)
 PlayGame = True
 while PlayGame:
     #update GUI
+    if (AutoRun1 == True): RunGameFrame(math.random.randint(1, 5))
     master.update_idletasks()
     master.update()
         
